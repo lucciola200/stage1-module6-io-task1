@@ -8,18 +8,18 @@ public class FileReader {
 
     public Profile getDataFromFile(File file) {
 
-        String fileTxt = "";
+        StringBuilder fileTxt = new StringBuilder();
         Profile profile = new Profile();
 
         try (InputStream inputStream = new FileInputStream(file)) {
             for (int ch; (ch = inputStream.read()) != -1; ) {
-                fileTxt += ((char) ch);
+                fileTxt.append((char) ch);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        String[] arrfile = fileTxt.split(System.lineSeparator());
+        String[] arrfile = fileTxt.toString().split(System.lineSeparator());
         for (int i = 0; i < arrfile.length; i++) {
             String keyVal = arrfile[i];
             String[] parts = keyVal.split(": ", 2);
