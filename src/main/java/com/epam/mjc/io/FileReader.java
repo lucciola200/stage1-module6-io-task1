@@ -7,29 +7,16 @@ import java.util.Locale;
 public class FileReader {
 
     public Profile getDataFromFile(File file) {
-        InputStream inputStream = null;
+
         String fileTxt = "";
         Profile profile = new Profile();
 
-        try {
-            inputStream = new FileInputStream(file);
-
+        try (InputStream inputStream = new FileInputStream(file)) {
             for (int ch; (ch = inputStream.read()) != -1; ) {
                 fileTxt += ((char) ch);
             }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
         String[] arrfile = fileTxt.split(System.lineSeparator());
